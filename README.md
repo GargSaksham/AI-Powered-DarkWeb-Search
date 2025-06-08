@@ -45,10 +45,10 @@ Run the following command:
 ##### pip install -r requirements.txt
 
 ### Step 5: Start Tor Services
-  Even if you restarted Tor in Step 2, it's good practice to ensure it's running before launching the application.
-  In your terminal, run:
+Even if you restarted Tor in Step 2, it's good practice to ensure it's running before launching the application.
+In your terminal, run:
 
-  ##### sudo systemctl start tor
+##### sudo systemctl start tor
 
 ### Step 6: Run the Application
 Finally, launch the main application file.
