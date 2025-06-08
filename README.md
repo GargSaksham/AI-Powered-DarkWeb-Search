@@ -9,6 +9,7 @@ Open your terminal.
 Open the torrc file using sudo with a text editor (like nano, mousepad):
 sudo nano /etc/tor/torrc
 Add or uncomment the following lines in the torrc file:
+
 SocksPort 9050
 
 SocksPort 9051
@@ -20,6 +21,7 @@ SocksPort 9051: This adds an additional SOCKS proxy port, which can be useful fo
 ### Step 2: Restart Tor Services
 After modifying the torrc file, you must restart the Tor service for the changes to take effect.
 In your terminal, run:
+
 sudo systemctl restart tor
 
 ### Step 3: Verify Internet Connection
@@ -50,4 +52,5 @@ Finally, launch the main application file.
 From the project's root directory in your terminal, run:
 
 python app.py
+
 Your Dark Web OSINT application should now be running.
