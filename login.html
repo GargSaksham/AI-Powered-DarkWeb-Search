@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecure Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #64ffda;
+            --secondary: #1e4d6b;
+            --dark: #0a192f;
+            --darker: #020c1b;
+            --light: #ccd6f6;
+            --accent: #573b8a;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Jost', sans-serif;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background Matrix Effect */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -3;
+            animation: gridPulse 8s infinite alternate;
+        }
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+            100% { opacity: 0.3; }
+        }
+        .circuit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='circuit' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50h100M50 0v100' stroke='%2364ffda' stroke-width='0.5' stroke-opacity='0.1' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23circuit)'/%3E%3C/svg%3E");
+            z-index: -2;
+            opacity: 0.4;
+        }
+        
+        .hexagon-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .hexagon {
+            position: absolute;
+            width: 100px;
+            height: 115px;
+            background: rgba(100, 255, 218, 0.03);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: floatHex 25s infinite linear;
+        }
+        
+        @keyframes floatHex {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Binary Rain Effect */
+        .binary-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .binary-column {
+            position: absolute;
+            top: -100px;
+            color: rgba(100, 255, 218, 0.15);
+            font-family: monospace;
+            font-size: 18px;
+            text-align: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            animation: binaryFall linear infinite;
+        }
+        
+        @keyframes binaryFall {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        
+        /* Animated Grid */
+        .orb-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.2;
+            animation: orbPulse 15s infinite alternate;
+        }
+        
+        @keyframes orbPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0.3;
+            }
+        }
+        
+        @keyframes gridPulse {
+            0% {
+                background-size: 40px 40px;
+                opacity: 0.3;
+            }
+            50% {
+                background-size: 45px 45px;
+                opacity: 0.4;
+            }
+            100% {
+                background-size: 40px 40px;
+                opacity: 0.3;
+            }
+        }
+        
+        .main-container {
+            width: 500px;
+            height: 620px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                        0 0 15px rgba(100, 255, 218, 0.3);
+            background: rgba(23, 42, 69, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.5s ease;
+            margin: 20px;
+            z-index: 1;
+        }
+        
+        .main-container:hover {
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6),
+                        0 0 25px rgba(100, 255, 218, 0.4);
+        }
+        
+        /* Security Shield Animation */
+        .security-shield {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 80px;
+            color: rgba(100, 255, 218, 0.1);
+            animation: pulse 4s infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.9);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+        }
+        
+        #chk {
+            display: none;
+        }
+        
+        .auth-form {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 30px;
+            box-sizing: border-box;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .signup {
+            z-index: 2;
+            padding-top: 80px;
+        }
+        
+        .login {
+            transform: translateY(100%);
+            background: rgba(238, 238, 238, 0.95);
+            border-radius: 50% 50% 0 0;
+            height: 520px;
+        }
+        
+        .form-title {
+            color: var(--primary);
+            font-size: 2.25rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+            letter-spacing: 1px;
+            transition: all 0.5s ease;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .login .form-title {
+            color: var(--accent);
+        }
+        
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(224, 222, 222, 0.2);
+            color: var(--light);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login input {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--darker);
+        }
+        
+        input:focus {
+            background: rgba(224, 222, 222, 0.3);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+        
+        .login input:focus {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 10px rgba(87, 59, 138, 0.3);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 18px;
+            z-index: 1;
+        }
+        
+        .login .input-icon {
+            color: var(--accent);
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, var(--accent), #6d44b8);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(87, 59, 138, 0.4);
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #6d44b8, var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(87, 59, 138, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .toggle-label {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            color: black !important;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 5;
+            text-align: center;
+            width: 100%;
+            padding: 0 30px;
+        }
+        
+        .toggle-label:hover {
+             color: #333 !important;
+   	     font-weight: bold;
+             text-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+        }
+        
+        .login .toggle-label {
+            color: var(--accent);
+        }
+        
+        .login .toggle-label:hover {
+            color: #6d44b8;
+            text-shadow: none;
+        }
+        
+        #chk:checked ~ .login {
+            transform: translateY(0);
+        }
+        
+        #chk:checked ~ .signup {
+            transform: translateY(-100%);
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            min-height: 20px;
+            width: 100%;
+        }
+        
+        .features {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 15px;
+        }
+        
+        .feature-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            gap: 5px;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(100, 255, 218, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .main-container {
+                width: 92%;
+                max-width: 350px;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+            }
+            
+            .auth-form {
+                padding: 30px 20px;
+            }
+            
+            .toggle-label {
+                font-size: 0.8rem;
+            }
+            
+            .security-shield {
+                font-size: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="cyber-grid"></div>
+    <div class="circuit-overlay"></div>
+    
+    <!-- Hexagon Background -->
+    <div class="hexagon-container" id="hexagon-container"></div>
+    
+    <!-- Binary Rain Effect -->
+    <div class="binary-rain" id="binary-rain"></div>
+
+     <!-- Glowing Orbs -->
+    <div class="orb" style="width: 300px; height: 300px; background: var(--primary); top: -100px; left: -100px;"></div>
+        <div class="orb" style="width: 400px; height: 400px; background: var(--accent); bottom: -150px; right: -150px;"></div>
+    </div> 
+    
+    <!-- Security Shield Icon -->
+   
+    <div class="security-shield">
+    <i class="fas fa-shield-alt"></i>
+</div>
+        <i class="fas fa-shield-alt"></i>
+    </div>
+
+    <div class="main-container">
+        <div class="features">
+            <span class="feature-badge"><i class="fas fa-shield-alt"></i> Military-Grade Encryption</span>
+            <span class="feature-badge"><i class="fas fa-bolt"></i> Instant Access</span>
+            <span class="feature-badge"><i class="fas fa-user-secret"></i> Complete Anonymity</span>
+        </div>
+        
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <form class="auth-form signup" onsubmit="return adduser(event)">
+            <h2 class="form-title">Join The Network</h2>
+            
+            <div class="input-group">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" name="name" placeholder="Your codename" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" name="email" placeholder="Secure email" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" name="phonenumber" placeholder="Burner number" pattern="[0-9]{10}" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" name="password" placeholder="Encryption key" required>
+            </div>
+            
+            <button type="submit">Activate Identity <i class="fas fa-fingerprint"></i></button>
+            <div id="signup-error" class="error-message"></div>
+            
+            <label for="chk" class="toggle-label" style="color:rgb(159, 224, 252)">
+                Already initiated? Access your portal <i class="fas fa-arrow-right"></i>
+            </label>
+        </form>
+
+        <form class="auth-form login" onsubmit="return loginUser(event)">
+            <h2 class="form-title">Secure Access</h2>
+            
+            <div class="input-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" name="email" placeholder="Your secure email" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" name="password" placeholder="Your encryption key" required>
+            </div>
+            
+            <button type="submit">Authenticate <i class="fas fa-sign-in-alt"></i></button>
+            <div id="login-error" class="error-message"></div>
+            
+            <label for="chk" class="toggle-label" >
+                Need access? Create your identity <i class="fas fa-arrow-right"></i>
+            </label>
+        </form>
+        
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <script>
+        // Create floating hexagons
+        function createHexagons() {
+            const container = document.getElementById('hexagon-container');
+            const count = 15;
+            
+            for (let i = 0; i < count; i++) {
+                const hexagon = document.createElement('div');
+                hexagon.className = 'hexagon';
+                hexagon.style.left = `${Math.random() * 100}%`;
+                hexagon.style.top = `${Math.random() * 100}%`;
+                hexagon.style.width = `${50 + Math.random() * 100}px`;
+                hexagon.style.height = `${60 + Math.random() * 120}px`;
+                hexagon.style.animationDuration = `${20 + Math.random() * 30}s`;
+                hexagon.style.animationDelay = `-${Math.random() * 20}s`;
+                container.appendChild(hexagon);
+            }
+        }
+
+        // Create binary rain effect
+        function createBinaryRain() {
+            const container = document.getElementById('binary-rain');
+            // Reduce number of columns for better performance
+            const columnSpacing = window.innerWidth > 768 ? 50 : 80;
+            const columns = Math.floor(window.innerWidth / columnSpacing);
+            const binaryChars = ['0', '1'];
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'binary-column';
+                column.style.left = `${(i * columnSpacing) + (columnSpacing/2)}px`;
+                column.style.animationDuration = `${3 + Math.random() * 7}s`;
+                column.style.animationDelay = `-${Math.random() * 5}s`;
+                
+                // Create random binary strings
+                let binaryString = '';
+                const lines = 10 + Math.floor(Math.random() * 5); // Reduced for performance
+                for (let j = 0; j < lines; j++) {
+                    binaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
+                }
+                
+                column.innerHTML = binaryString;
+                container.appendChild(column);
+            }
+        }
+        
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            // Reduced particle count for better performance
+            const particleCount = Math.min(20, window.innerWidth > 768 ? 20 : 10);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2px and 5px
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * -20;
+                particle.style.animation = `float ${duration}s linear infinite`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize all visual effects when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createHexagons();
+            createBinaryRain();
+            createParticles();
+        });
+
+        // Check if we're in a development environment without a backend
+        const isDevelopment = window.location.hostname === 'localhost' || 
+                             window.location.hostname === '127.0.0.1' ||
+                             window.location.protocol === 'file:';
+        
+        // Base URL for API calls - adjust as needed for production
+        const API_BASE_URL = isDevelopment ? 'http://localhost:5000' : 'https://api.cybersecureportal.com';
+
+        function adduser(event) {
+            event.preventDefault();
+            const errorElement = document.getElementById('signup-error');
+            errorElement.textContent = '';
+
+            const formData = {
+                name: event.target.name.value,
+                email: event.target.email.value,
+                phonenumber: event.target.phonenumber.value,
+                password: event.target.password.value
+            };
+
+            // Show loading state
+            const submitBtn = event.target.querySelector('button');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Securing your identity...';
+            submitBtn.disabled = true;
+
+            // Check if we're in development mode without a backend
+            // if (isDevelopment) {
+            //     // Simulate success response for demo/development
+            //     setTimeout(() => {
+            //         // Success animation
+            //         submitBtn.innerHTML = '<i class="fas fa-check"></i> Identity Secured!';
+            //         submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                    
+            //         setTimeout(() => {
+            //             document.getElementById('chk').checked = true;
+            //             event.target.reset();
+            //             submitBtn.innerHTML = originalBtnText;
+            //             submitBtn.style.background = 'linear-gradient(45deg, var(--accent), #6d44b8)';
+            //             submitBtn.disabled = false;
+            //         }, 1500);
+            //     }, 1000);
+            //     return;
+            // }
+
+            fetch('http://localhost:5000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Success animation
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Identity Secured!';
+                submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    document.getElementById('chk').checked = true;
+                    event.target.reset();
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.background = 'linear-gradient(45deg, var(--accent), #6d44b8)';
+                    submitBtn.disabled = false;
+                }, 1500);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = error.message || 'Secure connection failed';
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                
+                // Error animation
+                submitBtn.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    submitBtn.style.animation = '';
+                }, 500);
+            });
+        }
+
+        function loginUser(event) {
+            event.preventDefault();
+            const errorElement = document.getElementById('login-error');
+            errorElement.textContent = '';
+
+            const formData = {
+                email: event.target.email.value,
+                password: event.target.password.value
+            };
+
+            // Show loading state
+            const submitBtn = event.target.querySelector('button');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying credentials...';
+            submitBtn.disabled = true;
+
+            // Check if we're in development mode without a backend
+           // Simulate success response for demo/development
+                // setTimeout(() => {
+                //     // Success animation
+                //     submitBtn.innerHTML = '<i class="fas fa-check"></i> Access Granted!';
+                //     submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                    
+                //     setTimeout(() => {
+                //         // In demo mode, just show success without redirecting
+                //         alert('Login successful! In a production environment, you would be redirected to the dashboard.');
+                //         submitBtn.innerHTML = originalBtnText;
+                //         submitBtn.style.background = 'linear-gradient(45deg, var(--accent), #6d44b8)';
+                //         submitBtn.disabled = false;
+                //     }, 1500);
+                // }, 1000);
+                // return;
+            
+
+            fetch('http://localhost:5000/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Success animation
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Access Granted!';
+                submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = error.message || 'Authentication failed';
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                
+                // Error animation
+                submitBtn.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    submitBtn.style.animation = '';
+                }, 500);
+            });
+        }
+    </script>
+</body>
+</html>
