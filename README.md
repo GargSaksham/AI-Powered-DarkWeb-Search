@@ -7,12 +7,12 @@ You need to configure Tor to expose additional SOCKS ports, which your applicati
 Open your terminal.
 
 Open the torrc file using sudo with a text editor (like nano, mousepad):
-sudo nano /etc/tor/torrc
+##### sudo nano /etc/tor/torrc
 Add or uncomment the following lines in the torrc file:
 
-SocksPort 9050
+##### SocksPort 9050
 
-SocksPort 9051
+##### SocksPort 9051
 
 Save the file and exit the text editor.
 
@@ -25,14 +25,14 @@ After modifying the torrc file, you must restart the Tor service for the changes
 
 In your terminal, run:
 
-sudo systemctl restart tor
+##### sudo systemctl restart tor
 
 ### Step 3: Verify Internet Connection
 Before proceeding, ensure your system has an active internet connection.
 Open your terminal.
 Run the following command:
 
-ping abc.com
+##### ping abc.com
 
 If you see replies, your internet connection is active.
 If you see "Request timed out" or "Destination host unreachable," troubleshoot your network connection.
@@ -42,18 +42,18 @@ The project relies on several Python libraries. Install them using pip.
 Navigate to the project's root directory (where requirements.txt is located) in your terminal.
 Run the following command:
 
-pip install -r requirements.txt
+##### pip install -r requirements.txt
 
 ### Step 5: Start Tor Services
 Even if you restarted Tor in Step 2, it's good practice to ensure it's running before launching the application.
 In your terminal, run:
 
-sudo systemctl start tor
+##### sudo systemctl start tor
 
 ### Step 6: Run the Application
 Finally, launch the main application file.
 From the project's root directory in your terminal, run:
 
-python app.py
+##### python app.py
 
 Your Dark Web OSINT application should now be running.
