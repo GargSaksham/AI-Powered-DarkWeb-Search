@@ -13,13 +13,16 @@ Add or uncomment the following lines in the torrc file:
 SocksPort 9050
 
 SocksPort 9051
+
 Save the file and exit the text editor.
 
 SocksPort 9050: This is the default Tor SOCKS proxy port.
+
 SocksPort 9051: This adds an additional SOCKS proxy port, which can be useful for certain applications or for load balancing if your project uses multiple Tor connections.
 
 ### Step 2: Restart Tor Services
 After modifying the torrc file, you must restart the Tor service for the changes to take effect.
+
 In your terminal, run:
 
 sudo systemctl restart tor
