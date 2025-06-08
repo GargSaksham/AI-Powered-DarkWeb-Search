@@ -57,3 +57,9 @@ From the project's root directory in your terminal, run:
 ##### python app.py
 
 Your Dark Web OSINT application should now be running.
+
+
+## Collaboration & Inquiries
+#### For further details regarding this project, or to discuss potential collaborations, please feel free to reach out via email.
+
+#### You can contact us at: sakshamgarg134@gmail.com
