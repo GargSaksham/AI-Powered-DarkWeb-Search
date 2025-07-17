@@ -42,26 +42,26 @@ python3-undetected-chromedriver \
 python3-stem \
 python3-flask-cors
 
-### Install and Start tor
+### ✅ Install and Start tor
 
 sudo apt install tor
 sudo systemctl start tor
 
-#### Check tor status
+#### ✅ Check tor status
 sudo systemctl status tor
 
-### Run the Web Application
+### ✅ Run the Web Application
 
 python3 app.py
 Click on “Learn more and request demo”
 
-### Account Creation and LogIn
+### ✅ Account Creation and LogIn
 
 Fill all fields — mandatory
 Click Sign Up
 Log in using your email and password
 
-### Start Searching
+### ✅ Start Searching
 Enter a keyword (e.g., drugs, malware, weapons)
 Get a list of .onion links:
 ✅ Active links
@@ -75,12 +75,12 @@ Click on “View Details” to:
 
 🤖 Read AI-powered analysis of its content
 
-### Setup AI API Key
+### ✅ Setup AI API Key
 
 Required for the AI explanation feature.
 OPENAI_API_KEY = "your-openai-key-here"
 
-## Disclaimer
+### Disclaimer
 This tool is for educational and cybersecurity research purposes only.
 The author does not support or condone any illegal activity.
 
