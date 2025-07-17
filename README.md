@@ -50,7 +50,7 @@ sudo systemctl start tor
 #### Check tor status
 sudo systemctl status tor
 
-###Run the Web Application
+### Run the Web Application
 
 python3 app.py
 Click on “Learn more and request demo”
@@ -84,4 +84,4 @@ OPENAI_API_KEY = "your-openai-key-here"
 This tool is for educational and cybersecurity research purposes only.
 The author does not support or condone any illegal activity.
 
-### Contributions are Welcomed 
+### Contributions are Welcomed, feel free to reach me at sakshamgarg134@gmail.com
