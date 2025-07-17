@@ -47,7 +47,7 @@ python3-flask-cors
 sudo apt install tor
 sudo systemctl start tor
 
-#### ✅ Check tor status
+### ✅ Check tor status
 sudo systemctl status tor
 
 ### ✅ Run the Web Application
