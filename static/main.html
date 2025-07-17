@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond The Surface | Dark Web Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #64ffda;
+            --secondary: #1e4d6b;
+            --dark: #0a192f;
+            --darker: #020c1b;
+            --light: #ccd6f6;
+            --lighter: #e6f1ff;
+        }
+        
+        body {
+            background-color: var(--dark);
+            min-height: 100vh;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            overflow: hidden;
+        }
+        
+        .cyber-card {
+            background: rgba(23, 42, 69, 0.9);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border-radius: 16px;
+        }
+        
+        .cyber-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(100, 255, 218, 0.3);
+        }
+        
+        .search-input {
+            background: rgba(23, 42, 69, 0.8);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+            padding-left: 3rem; /* Fixed padding for icon */
+            padding-right: 1rem; /* Added right padding */
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.2);
+            background: rgba(23, 42, 69, 1);
+        }
+        
+        .cyber-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: 12px;
+        }
+        
+        .cyber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.4);
+        }
+        
+        .result-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            border-radius: 12px;
+        }
+        
+        .result-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--primary);
+            background: rgba(30, 77, 107, 0.3) !important;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        .online {
+            background-color: #10b981;
+            color: #10b981;
+        }
+        
+        .offline {
+            background-color: #ef4444;
+            color: #ef4444;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(100, 255, 218, 0.5);
+        }
+        
+        /* Fixed scrollbar styling */
+        .cyber-scrollbar {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(100, 255, 218, 0.3) rgba(23, 42, 69, 0.5);
+        }
+        
+        .cyber-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .cyber-scrollbar::-webkit-scrollbar-track {
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 10px;
+        }
+        
+        .cyber-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(100, 255, 218, 0.3);
+            border-radius: 10px;
+        }
+        
+        .cyber-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 255, 218, 0.5);
+        }
+        
+        .cyber-pulse {
+            animation: cyber-pulse 2s infinite;
+        }
+        
+        @keyframes cyber-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+        }
+        
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .mascot {
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(100, 255, 218, 0.5));
+        }
+        
+        .mascot:hover {
+            transform: translateY(-10px) rotate(5deg);
+            filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.8));
+        }
+        #results::-webkit-scrollbar {
+    		width: 8px;
+	}
+
+	#results::-webkit-scrollbar-track {
+    		background: rgba(23, 42, 69, 0.5);
+    		border-radius: 10px;
+	}
+
+	#results::-webkit-scrollbar-thumb {
+	    background: rgba(100, 255, 218, 0.3);
+	    border-radius: 10px;
+	}
+
+	#results::-webkit-scrollbar-thumb:hover {
+	    background: rgba(100, 255, 218, 0.5);
+	}
+
+        /* Suggestions dropdown styles */
+        .suggestions-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(23, 42, 69, 0.95);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .suggestion-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            color: var(--light);
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .suggestion-item:hover, .suggestion-item.selected {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--primary);
+        }
+
+        .suggestion-item:not(:last-child) {
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .suggestion-type {
+            font-size: 0.8em;
+            color: var(--primary);
+            opacity: 0.7;
+            margin-left: 0.5rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(100, 255, 218, 0.1);
+        }
+    </style>
+</head>
+<body class="cyber-grid">
+    <div class="container mx-auto px-4 h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-6 flex items-center justify-between">
+            <div class="flex items-center">
+                <svg class="w-10 h-10 text-cyan-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <h1 class="text-3xl font-bold text-cyan-300 glow-text">Beyond The Surface</h1>
+            </div>
+            <div class="text-gray-400 text-sm">
+                <span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-1"></span>
+                <span>Secure Connection</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col lg:flex-row gap-6 pb-6">
+            <!-- Search Section -->
+            <div class="cyber-card flex-1 p-6 flex flex-col">
+                <div class="mb-6">
+                    <h2 class="text-xl text-cyan-300 mb-2">Dark Web Intelligence</h2>
+                    <p class="text-gray-400">Search across verified dark web sources</p>
+                </div>
+                
+                <!-- Search Input with Suggestions -->
+                <div class="relative mb-6">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input id="searchQuery" type="text" placeholder="Enter your search query..."
+                        class="search-input w-full py-3 pl-10 pr-4 rounded-lg text-white text-lg"
+                        autocomplete="off">
+                    <div id="suggestions" class="suggestions-dropdown cyber-scrollbar">
+                        <!-- Suggestions will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <button onclick="searchDarkWeb()"
+                    class="cyber-button p-4 text-white font-bold text-lg mb-6 flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    Initiate Search
+                </button>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-4 text-center mb-6">
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <div class="text-cyan-300 text-2xl font-bold">-.--</div>
+                        <div class="text-gray-400 text-xs">INDEXED SITES</div>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <div class="text-green-400 text-2xl font-bold">--%</div>
+                        <div class="text-gray-400 text-xs">SUCCESS RATE</div>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <div class="text-2xl font-bold"><span class="text-purple-400">-.-</span><span class="text-gray-400">s</span></div>
+                        <div class="text-gray-400 text-xs">AVG RESPONSE</div>
+                    </div>
+                </div>
+                
+                <!-- Mascot/Character -->
+                <div class="mt-auto text-center">
+                    <div class="mascot inline-block animate__animated animate__bounceIn">
+                        <svg class="w-24 h-24 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                       
+                    </div>
+                </div>
+                 <p class="text-xs text-gray-500 mt-2" style="padding-left:16.8rem;" >Your Cyber Companion</p>
+            </div>
+            
+            <!-- Results Section with Fixed Scrollbar -->
+           <div class="cyber-card flex-1 p-6 flex flex-col">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl text-cyan-300">Search Results</h2>
+        <div id="timeTaken" class="text-cyan-300 text-sm font-mono"></div>
+    </div>
+    
+    <div id="results" class="flex-1 overflow-y-auto" style="max-height: calc(100vh - 250px);">
+        <div class="h-full flex flex-col items-center justify-center text-gray-400 py-8">
+            <svg class="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            <p class="text-center">Enter a search query to begin exploring</p>
+            <p class="text-xs mt-2 text-gray-600">Results will appear here</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+    let typingTimer;
+    const doneTypingInterval = 300; // milliseconds
+    const searchInput = document.getElementById('searchQuery');
+    const suggestionsDiv = document.getElementById('suggestions');
+
+    // Handle input changes
+    searchInput.addEventListener('input', function() {
+        clearTimeout(typingTimer);
+        if (searchInput.value) {
+            typingTimer = setTimeout(getSuggestions, doneTypingInterval);
+        } else {
+            suggestionsDiv.style.display = 'none';
+        }
+    });
+
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            navigateSuggestions(e.key === 'ArrowDown' ? 1 : -1);
+        } else if (e.key === 'Enter') {
+            const selected = document.querySelector('.suggestion-item.selected');
+            if (selected) {
+                e.preventDefault();
+                searchInput.value = selected.textContent.replace(/\s*\(.*\)$/, '');
+                suggestionsDiv.style.display = 'none';
+            }
+        }
+    });
+
+    // Close suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+            suggestionsDiv.style.display = 'none';
+        }
+    });
+
+    async function getSuggestions() {
+        const query = searchInput.value;
+        const words = query.split(' ');
+        const lastWord = words[words.length - 1];
+        const context = words.slice(0, -1).join(' ');
+
+        try {
+            // Show loading state in suggestions dropdown
+            suggestionsDiv.innerHTML = `
+                <div class="suggestion-item text-center">
+                    <span class="text-cyan-300">Loading suggestions...</span>
+                </div>
+            `;
+            suggestionsDiv.style.display = 'block';
+
+            // Get suggestions from the server
+            const response = await fetch(`http://localhost:5000/suggest?prefix=${encodeURIComponent(lastWord)}&context=${encodeURIComponent(context)}`);
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            // Display suggestions
+            if (data.suggestions && data.suggestions.length > 0) {
+                suggestionsDiv.innerHTML = '';
+                data.suggestions.forEach(suggestion => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    const text = context ? `${context} ${suggestion}` : suggestion;
+                    div.innerHTML = `
+                        <span class="flex-1">${text}</span>
+                        ${data.is_ai_powered ? `
+                            <span class="suggestion-type">AI</span>
+                        ` : ''}
+                    `;
+                    div.onclick = () => selectSuggestion(text);
+                    suggestionsDiv.appendChild(div);
+                });
+            } else {
+                suggestionsDiv.innerHTML = `
+                    <div class="suggestion-item text-center">
+                        <span class="text-gray-400">No suggestions available</span>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            console.error('Error fetching suggestions:', error);
+            suggestionsDiv.innerHTML = `
+                <div class="suggestion-item text-center">
+                    <span class="text-red-400">Failed to load suggestions: ${error.message}</span>
+                </div>
+            `;
+        }
+    }
+
+    function selectSuggestion(text) {
+        searchInput.value = text;
+        suggestionsDiv.style.display = 'none';
+        searchInput.focus();
+    }
+
+    function navigateSuggestions(direction) {
+        const items = suggestionsDiv.querySelectorAll('.suggestion-item');
+        const selected = suggestionsDiv.querySelector('.suggestion-item.selected');
+        let index = -1;
+
+        if (selected) {
+            selected.classList.remove('selected');
+            index = Array.from(items).indexOf(selected);
+        }
+
+        index += direction;
+        if (index >= items.length) index = 0;
+        if (index < 0) index = items.length - 1;
+
+        items[index].classList.add('selected');
+        items[index].scrollIntoView({ block: 'nearest' });
+    }
+
+    async function searchDarkWeb() {
+        const query = document.getElementById('searchQuery').value.trim();
+        const resultsContainer = document.getElementById('results');
+        const timeContainer = document.getElementById('timeTaken');
+        
+        if (!query) {
+            resultsContainer.innerHTML = `
+                <div class="text-center text-red-400 py-8 animate__animated animate__shakeX">
+                    <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    Please enter a search term
+                </div>`;
+            return;
+        }
+
+        // Show loading state
+        resultsContainer.innerHTML = `
+            <div class="h-full flex flex-col items-center justify-center">
+                <div class="relative w-24 h-24 mb-6">
+                    <div class="absolute inset-0 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                    <div class="absolute inset-4 rounded-full border-4 border-cyan-300 border-b-transparent animate-spin animation-delay-200"></div>
+                    <div class="absolute inset-8 rounded-full border-4 border-cyan-200 border-r-transparent animate-spin animation-delay-400"></div>
+                </div>
+                <p class="text-cyan-300 text-lg mb-2">Scanning Dark Web</p>
+                <p class="text-gray-400 text-sm">Searching for "${query}"</p>
+            </div>`;
+            
+        timeContainer.textContent = '';
+
+        try {
+            // Simulate search delay for demo purposes
+            await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+            
+            // Actual fetch request to backend
+            const startTime = Date.now();
+            const response = await fetch(`http://localhost:5000/search?query=${encodeURIComponent(query)}`);
+            
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
+
+            // Process results
+            if (!data.links || data.links.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-gray-400 py-8">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-center">No results found for "${data.query}"</p>
+                        <p class="text-xs mt-2 text-gray-600">Try different keywords</p>
+                    </div>`;
+                timeContainer.textContent = `Search completed in ${elapsedTime}s`;
+                return;
+            }
+
+            // Group by status
+            const activeLinks = data.links.filter(link => link.status === "active");
+            const inactiveLinks = data.links.filter(link => link.status === "inactive");
+
+            let resultsHTML = '';
+            
+            // Active links section
+            if (activeLinks.length > 0) {
+                resultsHTML += `
+                    <div class="animate__animated animate__fadeIn">
+                        <h3 class="text-lg text-gray-300 mb-3 flex items-center">
+                            <span class="status-dot online cyber-pulse"></span>
+                            Active Sites (${activeLinks.length})
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3 mb-6">`;
+                
+                activeLinks.forEach(link => {
+                    resultsHTML += `
+                        <div class="result-item p-4 bg-gray-800">
+                            <div class="flex items-start">
+                                <div class="flex-1 min-w-0">
+                                    <a href="#" onclick="showWarningModal('${link.link}'); return false;" 
+                                       class="text-blue-400 hover:underline font-mono text-sm truncate block">
+                                       ${link.link.replace('http://', '').replace('https://', '')}
+                                    </a>
+                                    <p class="text-gray-400 text-xs mt-1">Last active: ${new Date().toLocaleDateString()}</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="viewLinkDetails('${link.link}')" 
+                                        class="text-xs px-3 py-1 rounded-full text-cyan-400 hover:text-cyan-300 bg-gray-700 hover:bg-gray-600 transition-all">
+                                        View Details
+                                    </button>
+                                    <button onclick="copyToClipboard('${link.link}', event)" 
+                                        class="text-xs px-3 py-1 rounded-full text-cyan-400 hover:text-cyan-300 bg-gray-700 hover:bg-gray-600 transition-all">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                resultsHTML += '</div></div>';
+            }
+
+            // Inactive links section
+            if (inactiveLinks.length > 0) {
+                resultsHTML += `
+                    <div class="animate__animated animate__fadeIn ${activeLinks.length > 0 ? 'animate__delay-1s' : ''}">
+                        <h3 class="text-lg text-gray-300 mb-3 flex items-center">
+                            <span class="status-dot offline"></span>
+                            Inactive Sites (${inactiveLinks.length})
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3 opacity-80">`;
+                
+                inactiveLinks.forEach(link => {
+                    resultsHTML += `
+                        <div class="result-item p-4 bg-gray-800">
+                            <div class="flex items-start">
+                                <div class="flex-1 min-w-0">
+                                    <span class="text-gray-400 font-mono text-sm truncate block">
+                                        ${link.link.replace('http://', '').replace('https://', '')}
+                                    </span>
+                                    <p class="text-gray-500 text-xs mt-1">Last seen: ${new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
+                                </div>
+                                <button onclick="copyToClipboard('${link.link}', event)" 
+                                    class="ml-3 text-xs px-3 py-1 rounded-full text-cyan-400 hover:text-cyan-300 bg-gray-700 hover:bg-gray-600 transition-all">
+                                    Copy
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                resultsHTML += '</div></div>';
+            }
+
+            resultsContainer.innerHTML = resultsHTML;
+            timeContainer.textContent = `${data.links.length} results in ${elapsedTime}s`;
+
+        } catch (error) {
+            console.error('Search error:', error);
+            resultsContainer.innerHTML = `
+                <div class="h-full flex flex-col items-center justify-center text-red-400 py-8">
+                    <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <p class="text-center">Error: ${error.message || 'Failed to fetch results'}</p>
+                    <p class="text-xs mt-2 text-gray-600">Please try again later</p>
+                </div>`;
+            timeContainer.textContent = '';
+        }
+    }
+
+    function copyToClipboard(text, event) {
+        event.stopPropagation();
+        navigator.clipboard.writeText(text).then(() => {
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.classList.remove('bg-gray-700', 'text-cyan-400');
+            button.classList.add('bg-green-800', 'text-white');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-800', 'text-white');
+                button.classList.add('bg-gray-700', 'text-cyan-400');
+            }, 2000);
+        }).catch(err => {
+            console.error('Copy failed:', err);
+            event.target.textContent = 'Error';
+        });
+    }
+
+    function showWarningModal(url) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+        modal.innerHTML = `
+            <div class="bg-gray-900 border border-cyan-500 rounded-xl max-w-md w-full p-6 animate__animated animate__zoomIn">
+                <div class="flex items-center mb-4">
+                    <svg class="w-8 h-8 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-yellow-500">Security Warning</h3>
+                </div>
+                <p class="text-gray-300 mb-6">
+                    You are about to access a Tor link. Some content may be illegal, disturbing, or pose security risks.
+                    <br><br>
+                    <span class="font-mono text-sm break-all">${url}</span>
+                </p>
+                <div class="flex justify-end space-x-3">
+                    <button onclick="this.closest('div').remove()" class="px-4 py-2 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors">
+                        Cancel
+                    </button>
+                    <button onclick="window.open('${url}', '_blank', 'noopener,noreferrer'); this.closest('div').remove()" 
+                            class="px-4 py-2 rounded-lg bg-red-900 text-red-100 hover:bg-red-800 transition-colors">
+                        Proceed Anyway
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    function showLinkDetailsModal(url, snapshot, description) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+        modal.innerHTML = `
+            <div class="bg-gray-900 border border-cyan-500 rounded-xl max-w-4xl w-full p-6 animate__animated animate__zoomIn max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-cyan-300">Site Details</h3>
+                    <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="font-mono text-sm text-cyan-400 mb-4 break-all">${url}</div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-gray-300 mb-2 font-semibold">Site Snapshot</h4>
+                        <div class="bg-gray-800 rounded-lg p-2 h-[300px] flex items-center justify-center">
+                            ${snapshot ? `<img src="${snapshot}" alt="Site snapshot" class="max-w-full max-h-full object-contain">` 
+                                     : '<div class="text-gray-500">Snapshot not available</div>'}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-300 mb-2 font-semibold">AI Analysis</h4>
+                        <div class="bg-gray-800 rounded-lg p-4 prose prose-invert">
+                            ${description || '<div class="text-gray-500">Loading analysis...</div>'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    async function viewLinkDetails(url) {
+        // Show modal with loading state
+        showLinkDetailsModal(url, null, null);
+        
+        try {
+            // Fetch site details from backend
+            const response = await fetch(`http://localhost:5000/link_details?url=${encodeURIComponent(url)}`);
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Update modal with fetched data
+            showLinkDetailsModal(url, data.snapshot, data.description);
+        } catch (error) {
+            console.error('Error fetching link details:', error);
+            showLinkDetailsModal(url, null, `<div class="text-red-400">Error loading details: ${error.message}</div>`);
+        }
+    }
+
+    // Add input focus effect
+    document.getElementById('searchQuery').addEventListener('focus', function() {
+        const icon = this.previousElementSibling.querySelector('svg');
+        icon.classList.add('text-cyan-400');
+    });
+    
+    document.getElementById('searchQuery').addEventListener('blur', function() {
+        const icon = this.previousElementSibling.querySelector('svg');
+        icon.classList.remove('text-cyan-400');
+    });
+    
+    // Allow search on Enter key
+    document.getElementById('searchQuery').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchDarkWeb();
+        }
+    });
+</script>
+</body>
+</html>

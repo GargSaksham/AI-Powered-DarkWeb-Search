@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Beyond the Surface - Dark Web Intelligence</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.bgimg-1 {
+    background-image: url('/static/Pictures/pic2.svg');
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    filter: brightness(100%);
+    filter:contrast(100%);
+    filter:blur(50%);
+    opacity:10;
+    
+}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+
+/* Custom dark theme elements */
+.w3-dark-blue {
+  background-color: #0a192f !important;
+  color: white !important;
+}
+
+.w3-hover-dark-blue:hover {
+  background-color: #172a45 !important;
+}
+
+.w3-text-cyan {
+  color: #64ffda !important;
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #64ffda;
+}
+.coming-soon-animation::after {
+        content: '...';
+        animation: dots 1.5s steps(5, end) infinite;
+    }
+    @keyframes dots {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-dark-blue w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide w3-text-cyan">BEYOND THE SURFACE</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#features" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i> FEATURES</a>
+      <a href="#solutions" class="w3-bar-item w3-button"><i class="fa fa-lightbulb-o"></i> SOLUTIONS</a>
+      <a href="#security" class="w3-bar-item w3-button"><i class="fa fa-shield"></i> Vision</a>
+      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-dark-blue w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#features" onclick="w3_close()" class="w3-bar-item w3-button">FEATURES</a>
+  <a href="#solutions" onclick="w3_close()" class="w3-bar-item w3-button">SOLUTIONS</a>
+  <a href="#security" onclick="w3_close()" class="w3-bar-item w3-button">SECURITY</a>
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+</nav>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container" id="home"></header>
+  <!-- Enlarged image on the left with text aligned right -->
+  <div class="w3-display-left w3-text-black" style="padding:28px; display:flex; align-items:center; width:85%;">
+    <img src="/static/Pictures/pic1.png" alt="Dark Web Intelligence" style="width:650px;height:650px; margin-right:140px;" class="w3-hide-small">
+    <div style="display: flex; justify-content: flex-end; text-align: right; flex-grow: 1; flex-direction: column; align-items: flex-end;padding-left:10rem;padding-top:2.5rem;">
+    <span class="w3-jumbo w3-hide-small" style="white-space: nowrap;font-weight: 800;">Uncover What Lies Beneath</span>
+
+    <span class="w3-large" style="padding-left: -10rem;padding-right: 2rem;font-weight: 200;">The comprehensive dark web intelligence platform for analysts</span>
+    <p>
+      <a href="/static/login.html" 
+      class="w3-text-teal w3-btn w3-aqua w3-padding-large w3-large w3-margin-top" 
+      style="padding-right: 1rem !important; display: inline-block;margin-right: 5rem; font-weight: 700;">
+      Learn more and request demo
+   </a>
+
+    </p>
+</div>
+
+  </div> 
+  <div class="w3-display-bottomleft w3-text-white w3-large" style="padding:24px 48px">
+    <i class="fa fa-lock w3-hover-opacity"></i>
+    <i class="fa fa-user-secret w3-hover-opacity"></i>
+    <i class="fa fa-search w3-hover-opacity"></i>
+  </div>
+</header>
+
+<!-- About Section -->
+<div class="w3-container w3-dark-blue" style="padding:128px 16px" id="about">
+  <h3 class="w3-center w3-text-cyan">ABOUT BEYOND THE SURFACE</h3>
+  <p class="w3-center w3-large">Revolutionizing dark web intelligence analysis</p>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter">
+      <i class="fa fa-bullseye feature-icon"></i>
+      <p class="w3-large">Focused Intelligence</p>
+      <p>Our platform cuts through the noise of the dark web, delivering only the most relevant intelligence to your analysts.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-link feature-icon"></i>
+      <p class="w3-large">Identity Obfuscation</p>
+      <p>All investigator activity is automatically routed through multiple encrypted nodes, completely isolating your digital footprint from dark web entities.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-shield feature-icon"></i>
+      <p class="w3-large">Secure Access</p>
+      <p>Military-grade encryption and secure access protocols protect your operations while gathering intelligence.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-database feature-icon"></i>
+      <p class="w3-large">Centralized Repository</p>
+      <p>All your dark web intelligence in one secure, searchable location with version control and audit trails.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="w3-container" style="padding:128px 16px" id="features">
+  <h3 class="w3-center w3-text-cyan">PLATFORM FEATURES</h3>
+  <p class="w3-center w3-large">Designed specifically for intelligence professionals</p>
+  
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-col m6">
+      <h3>Unified Intelligence Dashboard</h3>
+      <p>Our platform integrates multiple dark web tools into a single interface, eliminating the need to switch between applications. Analysts can:</p>
+      <ul class="w3-ul">
+        <li><i class="fa fa-check w3-text-cyan"></i> Access multiple dark web sources simultaneously</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Cross-reference data in real-time</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Maintain operational continuity</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Reduce cognitive load from context switching</li>
+      </ul>
+    </div>
+    <div class="w3-col m6" style="padding-bottom: 30px;">  <!-- Added padding-bottom -->
+        <img class="w3-image w3-round-large" 
+             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+             alt="Dashboard" 
+             style="width:100%; max-width:700px; height:auto; margin-bottom: 20px;">  <!-- Added margin-bottom -->
+      </div>
+  </div>
+  
+ 
+
+<!-- Solutions Section -->
+<div class="w3-container w3-dark-blue" style="padding:125px 16px" id="solutions">
+  <h3 class="w3-center w3-text-cyan">INDUSTRY SOLUTIONS</h3>
+  <p class="w3-center w3-large">Tailored solutions for your intelligence needs</p>
+  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card w3-white">
+        <div class="w3-container">
+          <h3>Law Enforcement</h3>
+          <p class="w3-opacity">Criminal Investigations</p>
+          <p>Track criminal activity, identify networks, and gather evidence with our specialized law enforcement tools.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-shield"></i> Learn More</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card w3-white">
+        <div class="w3-container">
+          <h3>Financial Sector</h3>
+          <p class="w3-opacity">Fraud Prevention</p>
+          <p>Monitor for stolen financial data, detect fraud rings, and protect your institution from dark web threats.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-bank"></i> Learn More</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card w3-white">
+        <div class="w3-container">
+          <h3>Corporate Security</h3>
+          <p class="w3-opacity">Threat Intelligence</p>
+          <p>Protect your intellectual property and identify threats before they surface in the Dark world.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-building"></i> Learn More</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card w3-white">
+        <div class="w3-container">
+          <h3>Government</h3>
+          <p class="w3-opacity">National Security</p>
+          <p>Comprehensive tools for national security agencies to monitor and counter dark web threats.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-flag"></i> Learn More</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Security Section -->
+<div class="w3-container" style="padding:128px 16px" id="security">
+  <h3 class="w3-center w3-text-cyan">SECURITY & COMPLIANCE</h3>
+  <p class="w3-center w3-large">Built with security as the foundation</p>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter">
+      <i class="fa fa-lock feature-icon"></i>
+      <p class="w3-large">End-to-End Encryption</p>
+      <p>All data is encrypted in transit and at rest using AES-256 encryption standards.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-user-secret feature-icon"></i>
+      <p class="w3-large">Anonymity Protection</p>
+      <p>Built-in safeguards to protect investigator identities and operational security.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-certificate feature-icon"></i>
+      <p class="w3-large">Certified Infrastructure</p>
+      <p>Hosted in SOC 2 Type II certified facilities with regular third-party audits.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-history feature-icon"></i>
+      <p class="w3-large">Comprehensive Audit Logs</p>
+      <p>Tamper-proof logs of all platform activity for compliance and review.</p>
+    </div>
+  </div>
+</div>
+<div class="w3-row-padding w3-section">
+    <div class="w3-col m6">
+      <img class="w3-image w3-round-large" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Data Visualization" width="700" height="394">
+    </div>
+    <div class="w3-col m6">
+      <h3>Advanced Link Analysis</h3>
+      <p>Our automated relationship mapping uncovers hidden connections that manual analysis might miss:</p>
+      <ul class="w3-ul">
+        <li><i class="fa fa-check w3-text-cyan"></i> Automatic entity extraction and linking</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Visual relationship mapping</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Timeline analysis of connections</li>
+        <li><i class="fa fa-check w3-text-cyan"></i> Alert system for new connections</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Section -->
+<div class="w3-container w3-row w3-center w3-padding-64" style="background-color: #87CEEB; border-top: 4px solid #0a192f; border-bottom: 4px solid #0a192f;">
+    <h3 class="w3-text-dark-grey" style="font-size: 36px; font-weight: bold; margin-bottom: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+        <span class="coming-soon-animation">Coming Soon</span>
+    </h3>
+    <p class="w3-large w3-text-dark-grey" style="margin-bottom: 32px;">Our live platform metrics will be available upon launch</p>
+    
+    <div class="w3-row-padding" style="margin-bottom: 32px;">
+        <div class="w3-quarter">
+            <div class="w3-panel w3-round-large w3-white w3-padding-16" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);">
+                <span class="w3-xxlarge" style="color: #0a192f;">---</span>
+                <br><span class="w3-text-dark-grey">Dark Web Sources</span>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-panel w3-round-large w3-white w3-padding-16" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);">
+                <span class="w3-xxlarge" style="color: #0a192f;">---</span>
+                <br><span class="w3-text-dark-grey">Entities Tracked</span>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-panel w3-round-large w3-white w3-padding-16" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);">
+                <span class="w3-xxlarge" style="color: #0a192f;">--.--%</span>
+                <br><span class="w3-text-dark-grey">System Uptime</span>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-panel w3-round-large w3-white w3-padding-16" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);">
+                <span class="w3-xxlarge" style="color: #0a192f;">--/-</span>
+                <br><span class="w3-text-dark-grey">Active Monitors</span>
+            </div>
+        </div>
+    </div>
+    
+    <a href='#contact' class="w3-button w3-padding-large w3-margin-top w3-round-xxlarge" style="background-color: #0a192f; color: white; font-weight: bold; letter-spacing: 1px;">
+        <i class="fa fa-envelope"></i> Get Notified at Launch
+    </a>
+</div>
+
+<!-- Contact Section -->
+<div class="w3-container w3-dark-blue" style="padding:128px 16px" id="contact">
+  <h3 class="w3-center w3-text-cyan">CONTACT</h3>
+  <p class="w3-center w3-large">Request a confidential consultation:</p>
+  <div style="margin-top:48px">
+    <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right w3-text-cyan"></i> UPES DEHRADUN</p>
+    <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right w3-text-cyan"></i> Secure Line: 90XXXXXXXX</p>
+    <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right w3-text-cyan"> </i> sakshamgarg134@gmail.com</p>
+    <br>
+    <form action="https://formspree.io/f/mgvazqbj" method="post" autocomplete="on" target="_blank">
+      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Organization" required name="Organization"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Security Clearance Level" name="Clearance"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-cyan w3-hover-dark-blue" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND SECURE MESSAGE
+        </button>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-dark-blue w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-lock w3-hover-opacity"></i>
+    <i class="fa fa-user-secret w3-hover-opacity"></i>
+    <i class="fa fa-shield w3-hover-opacity"></i>
+  </div>
+  <p>Beyond the Surface - Dark Web Intelligence Platform</p>
+  <p>All rights reserved. Secure access only.</p>
+</footer>
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>
+

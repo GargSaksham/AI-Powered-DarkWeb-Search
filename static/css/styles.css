@@ -1,0 +1,110 @@
+.suggestions-list {
+    position: absolute;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: rgba(23, 42, 69, 0.9);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(100, 255, 218, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    margin-top: 4px;
+    z-index: 50;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 255, 218, 0.3) rgba(23, 42, 69, 0.5);
+}
+
+.suggestions-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.suggestions-list::-webkit-scrollbar-track {
+    background: rgba(23, 42, 69, 0.5);
+    border-radius: 10px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.3);
+    border-radius: 10px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 255, 218, 0.5);
+}
+
+.suggestions-list li {
+    padding: 12px 16px;
+    cursor: pointer;
+    color: #ccd6f6;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+
+.suggestions-list li:hover {
+    background: rgba(30, 77, 107, 0.3);
+    color: #64ffda;
+    border-left-color: #64ffda;
+    transform: translateX(5px);
+}
+
+.suggestions-list li.ai-suggestion {
+    background: rgba(28, 40, 51, 0.8);
+    border-left: 3px solid #64ffda;
+    position: relative;
+}
+
+.suggestions-list li.ai-suggestion:hover {
+    background: rgba(35, 52, 70, 0.8);
+}
+
+.suggestions-list li.ai-suggestion::after {
+    content: "AI";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75em;
+    color: #64ffda;
+    font-weight: bold;
+    background: rgba(100, 255, 218, 0.1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    text-shadow: 0 0 8px rgba(100, 255, 218, 0.5);
+}
+
+.suggestion-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: rgba(30, 77, 107, 0.3);
+    transform: translateX(5px);
+}
+
+.suggestion-item:hover span.font-mono {
+    color: var(--primary);
+}
+
+/* Animation for suggestions appearance */
+.suggestions-list:not(.hidden) {
+    animation: slideDown 0.2s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 
